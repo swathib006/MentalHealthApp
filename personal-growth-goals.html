@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Behavior Monitoring</title>
+  <link rel="stylesheet" href="styles7.css">
+
+  <script type="text/javascript">
+    (function(e,b){
+      if(!b.__SV){
+        var a,f,i,g;
+        window.mixpanel=b;b._i=[];
+        b.init=function(a,e,h){
+          function f(b,d){
+            var a=d.split(".");
+            2==a.length&&(b=b[a[0]],d=a[1]);
+            b[d]=function(){b.push([d].concat(Array.prototype.slice.call(arguments,0)))};
+          }
+          var c=b;"undefined"!==typeof h?c=b[h]=[]:h="mixpanel";
+          c.people=c.people||[];
+          c.toString=function(b){var a="mixpanel";"mixpanel"!==h&&(a+="."+h);
+          b||(a+=" (stub)");return a};
+          c.people.toString=function(){return"mixpanel.people (stub)"};
+          i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+          for(g=0;g<i.length;g++)f(c,i[g]);
+          b._i.push([a,e,h]);
+        };
+        b.__SV=1.2;
+      }
+    })(document,window.mixpanel||[]);
+    mixpanel.init("1820291e5f9ea8ce4bcf229c9deb6876");  // Replace with your actual Mixpanel project token
+  
+    // Function to identify logged-in user
+    function identifyUser(userID) {
+      // Use Mixpanel's identify method to track the current user
+      mixpanel.identify(userID);
+      
+      // You can track the event here once user is identified
+      mixpanel.track("User Logged In", {
+        user: userID
+      });
+    }
+  
+    // Example of updating user data
+    function updateSleep(sleepInput, currentUser) {
+      if (sleepInput && !isNaN(sleepInput)) {
+        const currentDate = new Date().toLocaleDateString();
+        mixpanel.track("Sleep Updated", {
+          user: currentUser,
+          hours: sleepInput,
+          date: currentDate
+        });
+      }
+    }
+  
+    // Call identifyUser when a user logs in
+    // Example: Call this function with user ID when a user logs in
+    identifyUser("user1");  // replace "user1" with the actual user ID from your login system
+  </script>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>Multi-User Behavior Tracker</h1>
+    
+    <!-- User Selection -->
+    <div class="user-section">
+      <label for="userSelect">Select User:</label>
+      <select id="userSelect" onchange="switchUser()">
+        <option value="user1">User 1</option>
+        <option value="user2">User 2</option>
+        <option value="user3">User 3</option>
+      </select>
+    </div>
+
+    <!-- Sleep Tracker -->
+    <section class="tracker-section">
+      <h2>Sleep Tracker</h2>
+      <label for="sleepInput">Enter hours of sleep:</label>
+      <input type="number" id="sleepInput" placeholder="Hours of sleep">
+      <button onclick="updateSleep()">Update Sleep</button>
+      <div class="graph-container">
+        <canvas id="sleepGraph"></canvas>
+      </div>
+    </section>
+
+    <!-- Workout Tracker -->
+    <section class="tracker-section">
+      <h2>Workout Tracker</h2>
+      <label for="workoutInput">Enter workout hours:</label>
+      <input type="number" id="workoutInput" placeholder="Workout hours">
+      <button onclick="updateWorkout()">Update Workout</button>
+      <div class="graph-container">
+        <canvas id="workoutGraph"></canvas>
+      </div>
+    </section>
+
+    <!-- Focus Sessions Tracker -->
+    <section class="tracker-section">
+      <h2>Focus Sessions Tracker</h2>
+      <label for="focusInput">Enter focus session hours:</label>
+      <input type="number" id="focusInput" placeholder="Focus session hours">
+      <button onclick="updateFocus()">Update Focus</button>
+      <div class="graph-container">
+        <canvas id="focusGraph"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    let currentUser = 'user1'; // Default user
+    let sleepData = [];
+    let workoutData = [];
+    let focusData = [];
+    let sleepDates = [];
+    let workoutDates = [];
+    let focusDates = [];
+
+    // Load the user data based on the selected user
+    function loadUserData() {
+      const userData = JSON.parse(localStorage.getItem(currentUser)) || { sleep: [], workout: [], focus: [] };
+      sleepData = userData.sleep;
+      workoutData = userData.workout;
+      focusData = userData.focus;
+
+      // Track event: User data loaded
+      mixpanel.track("User Data Loaded", {
+        user: currentUser,
+        sleepDataCount: sleepData.length,
+        workoutDataCount: workoutData.length,
+        focusDataCount: focusData.length
+      });
+
+      updateCharts();
+    }
+
+    // Switch user and load their data
+    function switchUser() {
+      currentUser = document.getElementById('userSelect').value;  // Update currentUser without redeclaring
+      loadUserData();
+
+      // Track event: User switched
+      mixpanel.track("User Switched", {
+        previousUser: currentUser,
+        newUser: document.getElementById('userSelect').value
+      });
+    }
+
+    // Save data to localStorage for the current user
+    function saveUserData() {
+      const userData = {
+        sleep: sleepData,
+        workout: workoutData,
+        focus: focusData
+      };
+      localStorage.setItem(currentUser, JSON.stringify(userData));
+    }
+
+    // Update the sleep data and track it
+    function updateSleep() {
+      const sleepInput = document.getElementById('sleepInput').value;
+      if (sleepInput && !isNaN(sleepInput)) {
+        const currentDate = new Date().toLocaleDateString();
+        sleepData.push(sleepInput);
+        sleepDates.push(`Day ${sleepData.length} - ${currentDate}`);
+        saveUserData();
+        updateCharts();
+
+        // Track event: Sleep updated
+        mixpanel.track("Sleep Updated", {
+          user: currentUser,
+          hours: sleepInput,
+          date: currentDate
+        });
+
+        document.getElementById('sleepInput').value = '';
+      }
+    }
+
+    // Update the workout data and track it
+    function updateWorkout() {
+      const workoutInput = document.getElementById('workoutInput').value;
+      if (workoutInput && !isNaN(workoutInput)) {
+        const currentDate = new Date().toLocaleDateString();
+        workoutData.push(workoutInput);
+        workoutDates.push(`Day ${workoutData.length} - ${currentDate}`);
+        saveUserData();
+        updateCharts();
+
+        // Track event: Workout updated
+        mixpanel.track("Workout Updated", {
+          user: currentUser,
+          duration: workoutInput,
+          date: currentDate
+        });
+
+        document.getElementById('workoutInput').value = '';
+      }
+    }
+
+    // Update the focus data and track it
+    function updateFocus() {
+      const focusInput = document.getElementById('focusInput').value;
+      if (focusInput && !isNaN(focusInput)) {
+        const currentDate = new Date().toLocaleDateString();
+        focusData.push(focusInput);
+        focusDates.push(`Day ${focusData.length} - ${currentDate}`);
+        saveUserData();
+        updateCharts();
+
+        // Track event: Focus updated
+        mixpanel.track("Focus Updated", {
+          user: currentUser,
+          duration: focusInput,
+          date: currentDate
+        });
+
+        document.getElementById('focusInput').value = '';
+      }
+    }
+
+    // Update all charts
+    function updateCharts() {
+      sleepChart.data.labels = sleepDates;
+      sleepChart.data.datasets[0].data = sleepData;
+
+      workoutChart.data.labels = workoutDates;
+      workoutChart.data.datasets[0].data = workoutData;
+
+      focusChart.data.labels = focusDates;
+      focusChart.data.datasets[0].data = focusData;
+
+      sleepChart.update();
+      workoutChart.update();
+      focusChart.update();
+
+      // Track event: Charts updated
+      mixpanel.track("Charts Updated", {
+        user: currentUser,
+        sleepDataCount: sleepData.length,
+        workoutDataCount: workoutData.length,
+        focusDataCount: focusData.length
+      });
+    }
+
+    // Initialize charts
+    const sleepGraph = document.getElementById('sleepGraph').getContext('2d');
+    const workoutGraph = document.getElementById('workoutGraph').getContext('2d');
+    const focusGraph = document.getElementById('focusGraph').getContext('2d');
+
+    const sleepChart = new Chart(sleepGraph, {
+      type: 'line',
+      data: {
+        labels: sleepDates,
+        datasets: [{
+          label: 'Hours of Sleep',
+          data: sleepData,
+          borderColor: 'blue',
+          fill: false
+        }]
+      }
+    });
+
+    const workoutChart = new Chart(workoutGraph, {
+      type: 'bar',
+      data: {
+        labels: workoutDates,
+        datasets: [{
+          label: 'Workout Hours',
+          data: workoutData,
+          backgroundColor: 'orange'
+        }]
+      }
+    });
+
+    const focusChart = new Chart(focusGraph, {
+      type: 'doughnut',
+      data: {
+        labels: focusDates,
+        datasets: [{
+          label: 'Focus Sessions',
+          data: focusData,
+          backgroundColor: ['green', 'lightgray'],
+        }]
+      }
+    });
+
+    // Load the data for the default user on page load
+    window.onload = function() {
+      loadUserData();
+    };
+  </script>
+</body>
+</html>

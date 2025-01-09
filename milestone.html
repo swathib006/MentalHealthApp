@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Skill Roadmap</title>
+</head>
+<body>
+    <header>
+        <h1>SkillUp: Your Skill Roadmap</h1>
+    </header>
+
+    <main>
+        <section id="roadmap">
+            <h2>Skill Pathway Overview</h2>
+            <div class="roadmap-container">
+                <div class="stage">
+                    <h3>Beginner</h3>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="milestone1" onclick="updateProgress()">
+                            <label for="milestone1">Intro to JavaScript</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="milestone2" onclick="updateProgress()">
+                            <label for="milestone2">Variables and Data Types</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="stage">
+                    <h3>Intermediate</h3>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="milestone3" onclick="updateProgress()">
+                            <label for="milestone3">Functions and Arrays</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="milestone4" onclick="updateProgress()">
+                            <label for="milestone4">DOM Manipulation</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="stage">
+                    <h3>Advanced</h3>
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="milestone5" onclick="updateProgress()">
+                            <label for="milestone5">Asynchronous JavaScript</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="milestone6" onclick="updateProgress()">
+                            <label for="milestone6">JavaScript ES6+</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="progress-tracker">
+                <h3>Your Progress</h3>
+                <progress id="progressBar" value="0" max="100"></progress>
+                <p id="progressText">Progress: 0%</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SkillUp. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

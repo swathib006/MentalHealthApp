@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SkillUp</title>
+    <link rel="stylesheet" href="styles8.css">
+    
+    <!-- Mixpanel Initialization Script -->
+    <script>
+        (function (e, a) {
+            if (!a.__SV) {
+                var b = window;
+                try {
+                    var c, l, i, j = b.location, g = j.hash;
+                    c = function (a, b) {
+                        return (l = a.match(RegExp(b + "=([^&]*)"))) ? l[1] : null;
+                    };
+                    g && c(g, "state") && ("mpeditor" === c(g, "state") && (b.sessionStorage.setItem("_mpcehash", g), history.replaceState(j.pathname + j.search, "")));
+                } catch (m) {}
+                var k, h;
+                window.mixpanel = a;
+                a._i = [];
+                a.init = function (b, c, f) {
+                    function e(b, a) {
+                        var c = a.split(".");
+                        2 == c.length && (b = b[c[0]], a = c[1]);
+                        b[a] = function () {
+                            b.push([a].concat(Array.prototype.slice.call(arguments, 0)));
+                        };
+                    }
+                    var d = a;
+                    "undefined" !== typeof f ? d = a[f] = [] : f = "mixpanel";
+                    d.people = d.people || [];
+                    d.toString = function (b) {
+                        var a = "mixpanel";
+                        "mixpanel" !== f && (a += "." + f);
+                        b || (a += " (stub)");
+                        return a;
+                    };
+                    d.people.toString = function () {
+                        return d.toString(1) + ".people (stub)";
+                    };
+                    k = "disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+                    for (h = 0; h < k.length; h++) e(d, k[h]);
+                    a._i.push([b, c, f]);
+                };
+                a.__SV = 1.2;
+                b = e.createElement("script");
+                b.type = "text/javascript";
+                b.async = !0;
+                b.src = "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
+                c = e.getElementsByTagName("script")[0];
+                c.parentNode.insertBefore(b, c);
+            }
+        })(document, window.mixpanel || []);
+    </script>
+
+    <!-- Mixpanel Project Initialization -->
+    <script>
+        mixpanel.init("1820291e5f9ea8ce4bcf229c9deb6876"); // Replace with your Mixpanel project token
+    </script>
+
+    <!-- Custom Script -->
+    <script src="scripts-login.js" defer></script>
+</head>
+<body>
+    <!-- Login Section -->
+    <section id="login">
+        <h2>Login to Your Account</h2>
+        <p>Enter your details to get started:</p>
+        <form id="loginForm">
+            <label for="username">Name:</label>
+            <input type="text" id="username" placeholder="Enter your name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+            
+            <button id="loginButton">Login</button>
+        </form>
+        <p>Don't have an account? <a href="register.html">Register Here</a></p>
+    </section>
+
+    <!-- Login Form Handling and Mixpanel Tracking -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.getElementById("loginForm");
+
+            loginForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent page refresh
+
+                const username = document.getElementById("username").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                if (username === "" || email === "" || password === "") {
+                    alert("All fields are required.");
+                    return;
+                }
+
+                // Mixpanel Tracking: Login event
+                mixpanel.track("User Logged In", {
+                    username: username,
+                    email: email,
+                    timestamp: new Date().toISOString(),
+                });
+
+                // Mixpanel Identification: Link user activity to a unique user
+                mixpanel.identify(email); // Use email as the unique identifier
+                mixpanel.people.set({
+                    $name: username,
+                    $email: email,
+                    $last_login: new Date().toISOString(),
+                });
+
+                // Redirect to another page (e.g., dashboard)
+                window.location.href = "track-skill-development.html";
+            });
+        });
+    </script>
+</body>
+</html>

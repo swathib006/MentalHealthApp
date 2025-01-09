@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Skill Development</title>
+    <link rel="stylesheet" href="styles9.css">
+    <script src="scripts-track-skill.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Track Skill Develpoment</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="track-skill-development.html">Track Skills</a></li>
+                <li><a href="set-achievable-milestones.html">Milestones</a></li>
+                <li><a href="login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Welcome Section -->
+    <section id="welcome">
+        <h2>Welcome, <span id="userName">User</span>!</h2>
+        <p>Your email: <span id="userEmail">example@example.com</span></p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Your Skills</h2>
+        <ul id="skillsList">
+            <!-- Existing skills will be loaded dynamically -->
+        </ul>
+        <button id="addSkillButton">Add a New Skill</button>
+    </section>
+
+    <!-- Add Skill Modal -->
+    <div id="addSkillModal" style="display: none;">
+        <h2>Add New Skill</h2>
+        <form id="addSkillForm">
+            <label for="skillName">Skill Name:</label>
+            <input type="text" id="skillName" required>
+            
+            <label for="skillCategory">Category:</label>
+            <select id="skillCategory" required>
+                <option value="Technical">Technical</option>
+                <option value="Creative">Creative</option>
+                <option value="Soft Skills">Soft Skills</option>
+            </select>
+            
+            <label for="milestones">Milestones:</label>
+            <input type="number" id="milestones" required>
+            
+            <button type="submit">Save Skill</button>
+        </form>
+        <button id="closeModal">Close</button>
+    </div>
+
+    <script>
+        // Get user data from localStorage and update the page content
+        document.addEventListener("DOMContentLoaded", function () {
+            const username = localStorage.getItem("username");
+            const email = localStorage.getItem("email");
+
+            if (username && email) {
+                // Update the welcome section with user data
+                document.getElementById("userName").textContent = username;
+                document.getElementById("userEmail").textContent = email;
+            } else {
+                // Redirect to login page if no user data is found in localStorage
+                window.location.href = "login.html";
+            }
+        });
+    </script>
+</body>
+</html>

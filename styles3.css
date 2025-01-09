@@ -1,0 +1,125 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Color Theme */
+:root {
+    --primary-blue: #0073e6; /* Main blue color */
+    --secondary-green: #28a745; /* Main green color */
+    --background-light: #f4f8fb; /* Light background */
+    --text-dark: #333333; /* Dark text color */
+    --text-light: #ffffff; /* Light text color */
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Header Styling */
+header {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+header nav ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s, text-shadow 0.3s; /* Smooth transition */
+}
+
+header nav ul li a:hover {
+    color: var(--secondary-green);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Shadow on hover */
+}
+
+/* Community Section */
+#community {
+    display: flex;
+    margin: 20px;
+}
+
+/* Sidebar for Achievements & Badges */
+.sidebar {
+    flex: 1;
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.sidebar h2 {
+    margin-bottom: 15px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+/* Main Content */
+.main-content {
+    flex: 3;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h3 {
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+button {
+    background-color: var(--secondary-green);
+    color: var(--text-light);
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}

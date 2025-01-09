@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillUp - Empower Your Skills Journey</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+        }
+
+        /* Header Section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: #000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        header .logo img {
+            width: 50px;
+        }
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+        header nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        header nav a:hover {
+            color: #00d4ff;
+        }
+        header .contact-btn {
+            background: #00d084;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        header .contact-btn:hover {
+            background: #00a76c;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5% 10%;
+            background: #121212;
+            height: 100vh;
+        }
+        .hero .content {
+            max-width: 50%;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .hero .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+        .hero .btn-group a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+        .hero .btn-group .join-now {
+            background: #00d084;
+            color: #fff;
+        }
+        .hero .btn-group .join-now:hover {
+            background: #00a76c;
+        }
+        .hero .btn-group .learn-more {
+            background: #00223d;
+            color: #fff;
+        }
+        .hero .btn-group .learn-more:hover {
+            background: #001726;
+        }
+        .hero .illustration {
+            max-width: 40%;
+        }
+        .hero .illustration img {
+            width: 100%;
+        }
+
+        /* Skills Tracker Section */
+        .skills-tracker {
+            padding: 5% 10%;
+            background: #0a1931;
+        }
+        .block {
+            background: #132842;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        .block-header {
+            background: #1b3b5f;
+            padding: 20px;
+            font-size: 1.7rem;
+            text-align: center;
+            color: #4ef3c0;
+            border-bottom: 3px solid #284a63;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .block-header:hover {
+            background: #285d8e;
+            transform: translateY(-3px);
+        }
+        .sub-courses {
+            display: none;
+            padding: 20px;
+            background: #0f2337;
+        }
+        .sub-courses a {
+            display: block;
+            text-decoration: none;
+            color: #4ef3c0;
+            margin: 15px 0;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .sub-courses a:hover {
+            color: #ffffff;
+        }
+        .progress-tracker {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 90%;
+            margin: 10px auto;
+            height: 25px;
+            background: #0f2337;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #4ef3c0;
+        }
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #4ef3c0, #00b4d8);
+            transition: width 0.5s ease-in-out;
+        }
+        .progress-percentage {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 5% 10%;
+            text-align: center;
+        }
+        .contact h2 {
+            margin-bottom: 20px;
+        }
+        .contact form {
+            max-width: 600px;
+            margin: auto;
+        }
+        .contact input,
+        .contact textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            background: #333;
+            color: #fff;
+        }
+        .contact button {
+            padding: 10px 20px;
+            background: #00d084;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .contact button:hover {
+            background: #00a76c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="https://t3.ftcdn.net/jpg/09/07/61/40/240_F_907614018_jWtlpgfsjpxgB7i75MTNDEXijA5l9jVV.jpg">
+            <h2>SkillUp</h2>
+        </div>
+        <nav>
+            <a href="#hero">Home</a>
+            <a href="#skills">Skills Tracker</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a href="#contact" class="contact-btn">Contact Us</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="content">
+            <h1>Empower Your Skills Journey</h1>
+            <p>Unleash your potential with our transformative courses designed for lifelong learning and growth.</p>
+            <div class="btn-group">
+                <a href="#skills" class="join-now">Start Learning</a>
+                <a href="#contact" class="learn-more">Learn More</a>
+            </div>
+        </div>
+        <div class="illustration">
+            <img src="https://t3.ftcdn.net/jpg/08/47/56/06/360_F_847560605_llHCuTybrWpwTKdFl5uGDy4GNtmYQpps.webp" alt="Hero Illustration">
+        </div>
+    </section>
+
+    <!-- Skills Tracker Section -->
+    <section id="skills" class="skills-tracker">
+        <h2>Your Skills Tracker</h2>
+        <!-- Skill Blocks -->
+        <div class="block">
+            <div class="block-header" onclick="toggleSubCourses('personalDevelopment')">🚀 Personal Development (20%)</div>
+            <div id="personalDevelopment" class="sub-courses">
+                <a href="https://www.coursera.org/courses?query=health%20and%20fitness/" target="_blank" onclick="updateProgress(10)">Physical Health</a>
+                <a href="https://www.coursera.org/courses?query=mental%20health/" target="_blank" onclick="updateProgress(10)">Mental Health</a>
+            </div>
+        </div>
+        <!-- Add more blocks as needed -->
+         <!-- Block 2: Soft Skills -->
+        <div class="block">
+            <div class="block-header" onclick="toggleSubCourses('softSkills')">💡 Soft Skills (20%)</div>
+            <div id="softSkills" class="sub-courses">
+                <a href="https://www.coursera.org/courses?query=teamwork/" target="_blank" onclick="updateProgress(20)">Teamwork</a>
+                <a href="https://www.coursera.org/courses?query=communication/" target="_blank" onclick="updateProgress(20)">Communication</a>
+            </div>
+        </div> 
+        <!-- Block 3: Career Coaching -->
+        <div class="block">
+            <div class="block-header" onclick="toggleSubCourses('careerCoaching')">🎯 Career Coaching (20%)</div>
+            <div id="careerCoaching" class="sub-courses">
+                <a href="https://www.linkedin.com/learning/" target="_blank" onclick="updateProgress(10)">LinkedIn Strategies</a>
+                <a href="https://www.interviewkickstart.com/" target="_blank" onclick="updateProgress(10)">Interview Prep</a>
+            </div>
+        </div>
+
+        <!-- Block 4: Basic Coding -->
+        <div class="block">
+            <div class="block-header" onclick="toggleSubCourses('basicCoding')">💻 Basic Coding (20%)</div>
+            <div id="basicCoding" class="sub-courses">
+                <a href="https://www.codecademy.com" target="_blank" onclick="updateProgress(10)">HTML Basics</a>
+                <a href="https://www.freecodecamp.org" target="_blank" onclick="updateProgress(10)">JavaScript Basics</a>
+            </div>
+        </div>
+
+        <!-- Block 5: Marketing -->
+        <div class="block">
+            <div class="block-header" onclick="toggleSubCourses('marketing')">📈 Marketing (20%)</div>
+            <div id="marketing" class="sub-courses">
+                <a href="https://www.hubspot.com" target="_blank" onclick="updateProgress(10)">Digital Marketing</a>
+                <a href="https://mailchimp.com/" target="_blank" onclick="updateProgress(10)">Email Campaigns</a>
+            </div>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div class="progress-bar">
+                <div id="progressBar" class="progress-bar-fill"></div>
+            </div>
+            <div id="progressPercentage" class="progress-percentage">0%</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form action="#">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <script>
+        function toggleSubCourses(course) {
+            const subCourses = document.getElementById(course);
+            subCourses.style.display = (subCourses.style.display === 'none' || subCourses.style.display === '') ? 'block' : 'none';
+        }
+
+        function updateProgress(percent) {
+            const progressBar = document.getElementById('progressBar');
+            const progressPercentage = document.getElementById('progressPercentage');
+            let currentWidth = parseFloat(progressBar.style.width) || 0;
+            let newWidth = currentWidth + percent;
+
+            if (newWidth > 100) newWidth = 100;
+            progressBar.style.width = newWidth + '%';
+            progressPercentage.textContent = Math.round(newWidth) + '%';
+        }
+    </script>
+</body>
+</html>

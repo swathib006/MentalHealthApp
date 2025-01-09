@@ -1,0 +1,71 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #0073e6;
+    color: white;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Buttons */
+.cta-button {
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #005bb5;
+}
+
+/* Links */
+.hover-link {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.hover-link:hover {
+    color: #005bb5;
+}
+
+/* Lists */
+ul, ol {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 600px;
+    padding-left: 40px;
+}
+
+ul li, ol li {
+    margin: 10px 0;
+}
